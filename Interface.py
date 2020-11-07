@@ -17,6 +17,7 @@ class GUI_Support:
         self.BLUE = (50, 50, 255)
         self.GREY = (200, 200, 200)
         self.ORANGE = (200, 100, 50)
+        self.WHITE = (255,255,255)
         self.backgroundColor = (255,255,255)
         return pygame.display.set_mode(dims)
 
@@ -53,7 +54,7 @@ class GUI_Support:
         #color palette lines
         screen.blit(background, (0,0))
         
-        pygame.draw.line(screen, (0,0,0), (0,100), (1600,100))
+        
 
         #dot
         pygame.draw.circle(screen, self.drawingColor, (indexX, indexZ), circleRadius)
@@ -61,6 +62,8 @@ class GUI_Support:
             pygame.draw.circle(background,self.drawingColor,(indexX, indexZ), circleRadius)
         
         #color pallet
+        #pygame.draw.rect(screen, self.RED, (0,0,1200,100)
+        pygame.draw.line(screen, self.BLACK, (0,100), (1200,100))
         pygame.draw.circle(screen, self.BLACK, (50,50), 40)
         pygame.draw.circle(screen, self.RED, (150,50), 40)
         pygame.draw.circle(screen, self.BLUE, (250,50), 40)
@@ -68,6 +71,8 @@ class GUI_Support:
         pygame.draw.circle(screen, self.GREY, (450,50), 40)
         pygame.draw.circle(screen, self.ORANGE, (550,50), 40)
         pygame.draw.circle(screen, self.YELLOW, (650,50), 40)
+
+        pygame.draw.circle(screen, self.WHITE, (850,50), 40)
   
 
     
