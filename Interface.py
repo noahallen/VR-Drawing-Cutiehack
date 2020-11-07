@@ -1,7 +1,7 @@
 import socket
 import pygame, math, time, sys, os
 from ast import literal_eval
-from hooman import Hooman
+
 
 class GUI_Support:
 
@@ -30,36 +30,6 @@ class GUI_Support:
         width, height = dims
         screen.fill(self.backgroundColor)  #pass in chooseBackgroundColor() function
 
-        #BACKGROUND COLOR SLIDER
-        window_width, window_height = (400*1.25), (400*1.25)
-        hapi = Hooman(window_width, window_height)
-
-
-        slider_options = {"value_range": [0, 255]}
-
-        r_slider = hapi.slider(50, 300, 400, 10, slider_options)
-        g_slider = hapi.slider(50, 330, 400, 10, slider_options)
-        b_slider = hapi.slider(50, 360, 400, 10, slider_options)
-
-        while hapi.is_running:
-            bg_col = (r_slider.value(), g_slider.value(), b_slider.value())
-            hapi.background(bg_col)
-
-            r_slider.update()
-            g_slider.update()
-            b_slider.update()
-
-            hapi.fill(hapi.color["black"])
-            r_text = "r:{}".format(r_slider.value())
-            hapi.text(r_text, 50, 280)
-            g_text = "g:{}".format(g_slider.value())
-            hapi.text(g_text, 50, 310)
-            b_text = "b:{}".format(b_slider.value())
-            hapi.text(b_text, 50, 340)
-
-            hapi.flip_display()
-            hapi.event_loop()
-    
         #color palette lines
         pygame.draw.line(screen, (0,0,0), (0,100), (1600,100))
     
@@ -71,6 +41,9 @@ class GUI_Support:
     def getTextObjects(self, text, font):
         textSurface = font.render(text, True, (255,255,255))
         return textSurface, textSurface.get_rect()
+
+      
+        
 
 
 #Changes the screen content and updates the display
@@ -87,7 +60,7 @@ def connectToSocket():
     main()
 
 
-#Receives coordinates from web socket connection and passes them to the drone and GUI portions of the code
+#Receives coordinates from web socket connection and passes them to the  and GUI portions of the code
 def main():
     
     try:
@@ -118,7 +91,7 @@ def main():
     #         #Passes the GUI an array of the hand coordinates
     #         guiDisplay(coordinateArr)
 
-    #         #Function that takes coordinates and outputs drone commands to the connected drone
+    #         #Function that takes coordinates and outputs  commands to the connected 
            
 
 
@@ -139,9 +112,9 @@ if __name__ == "__main__":
     #Initializes the pygame GUI window
     guiSupport = GUI_Support()
 
-    #Initializes window to  (1.25 multiplier)
-    xWidth = 1000   
-    yHeight = 1000
+    #Initializes window to  (1.50 multiplier)
+    xWidth = 1200   
+    yHeight = 900
     screen = guiSupport.initDisplay((xWidth, yHeight))
 
     #Initializing font for coordinate display
@@ -149,8 +122,8 @@ if __name__ == "__main__":
     myFont = pygame.font.SysFont('Arial', 22)
     
 
-    #Drone icon
-    #icon = pygame.image.load(path + '\Drone.png')
+    # icon
+    #icon = pygame.image.load(path + '\.png')
     #pygame.display.set_icon(icon)
     pygame.display.set_caption('VR Paint')
 
