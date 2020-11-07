@@ -65,8 +65,8 @@ class GUI_Support:
             pygame.draw.circle(background,self.drawingColor,(centerX, centerZ), circleRadius)
         
         #color pallet
-        #pygame.draw.rect(screen, self.RED, (0,0,1200,100)
-        pygame.draw.line(screen, self.BLACK, (0,100), (1200,100))
+        
+        
         pygame.draw.circle(screen, self.BLACK, (50,50), 40)
         pygame.draw.circle(screen, self.RED, (150,50), 40)
         pygame.draw.circle(screen, self.BLUE, (250,50), 40)
@@ -74,7 +74,9 @@ class GUI_Support:
         pygame.draw.circle(screen, self.GREY, (450,50), 40)
         pygame.draw.circle(screen, self.ORANGE, (550,50), 40)
         pygame.draw.circle(screen, self.YELLOW, (650,50), 40)
-        pygame.draw.circle(screen, self.WHITE, (850,50), 40)
+        pygame.draw.circle(screen, self.BLACK, (750,50), 40)
+        
+
   
         if((math.sqrt((centerX - 50)**2) + (centerZ - 50)**2)) <= 40):
             self.drawingColor = self.BLACK
