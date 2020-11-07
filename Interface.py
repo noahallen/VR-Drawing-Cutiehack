@@ -8,6 +8,7 @@ class GUI_Support:
     #Initializes the GUI display
     def initDisplay(self, dims):
         pygame.init()
+        self.drawBool = False
         self.drawingColor = (0,0,0)
         self.BLACK = (0, 0, 0)
         self.RED = (255, 50, 50)
@@ -25,8 +26,13 @@ class GUI_Support:
 
     #Function to draw and update GUI graphics as it receives new coordinates
     def drawGraphics(self, position, screen, dims):
-        indexX, indexY, indexZ = position
+        indexX, indexY, indexZ = position[0]
+        thumbX, thumbY, thumbZ = position[1]
 
+        if(((indexX - thumbX) > 55) or ((thumbX - indexX) > 55) or ((indexZ - thumbZ) > 55) or ((thumbZ - indexZ) > 55)):
+            self.drawBool = False
+        else:
+            self.drawBool = True
         indexX = indexX * 1.5
         indexZ = indexZ * 1.5
 
@@ -51,7 +57,8 @@ class GUI_Support:
 
         #dot
         pygame.draw.circle(screen, self.drawingColor, (indexX, indexZ), circleRadius)
-        #pygame.draw.circle(background,self.drawingColor,(indexX, indexZ), circleRadius)
+        if(self.drawBool):
+            pygame.draw.circle(background,self.drawingColor,(indexX, indexZ), circleRadius)
         
         #color pallet
         pygame.draw.circle(screen, self.BLACK, (50,50), 40)
@@ -76,7 +83,7 @@ class GUI_Support:
 
 #Changes the screen content and updates the display
 def guiDisplay(coords):
-    guiSupport.drawGraphics(coords[0], screen, (800, 800))
+    guiSupport.drawGraphics(coords, screen, (800, 800))
     pygame.display.update()
 
 
