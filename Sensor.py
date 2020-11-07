@@ -39,22 +39,41 @@ class SampleListener(Leap.Listener):
             #handType = "Left hand" if hand.is_left else "Right hand"
 
             intPos = []
+            thumbPos = []
+            indexPos = []
    
             #Limits the xyz coordinate outputs to a certain range
             # Get fingers
             for finger in hand.fingers:
-                print finger.tip_position
-                print "    %s finger, id: %d, length: %fmm, width: %fmm" % (
-                    self.finger_names[finger.type],
-                    finger.id,
-                    finger.length,
-                    finger.width)
+
+                #Thumb
+                if(finger.type == 0):
+                    thumbPos = finger.tip_position
+
+
+                #Index
+                if(finger.type == 1):
+                    indexPos = finger.tip_position
+
+                # print finger.tip_position
+
+
+                # print "    %s finger, id: %d, length: %fmm, width: %fmm" % (
+                #     self.finger_names[finger.type],
+                #     finger.id,
+                #     finger.length,
+                #     finger.width)
                 
 
+            
 
-
-            # print("Coordinates of Pointer Finger: ")
-            # print(intPos)
+            print("Coordinates of Index Finger: " )
+            print(indexPos)
+            print("Coordinates of Thumb: " )
+            print(thumbPos)
+            intPos = [indexPos, thumbPos]
+            print("2D Array of Index and Thumb")
+            print(intPos)
 
             #Send information to the connected client, if one isnt there wait for connection of another client
             # try:
@@ -69,7 +88,7 @@ class SampleListener(Leap.Listener):
         #If no hands are detected send a zero vector to the client
         if frame.hands.is_empty:
             print("No Hands Detected")
-            zeroVector = [0, 450, 0]
+            zeroVector = [[-30, 450, -30], [30, 450, 30]]
 
             #Send information to the connected client, if one isnt there wait for connection of another client
             # try:
