@@ -41,25 +41,28 @@ class GUI_Support:
         indexX += 600
         indexZ += 450
         indexY = indexY / 20
-        indexX = int(indexX)
-        indexY = int(indexY)
-        indexZ = int(indexZ)
+
+
+        centerX = (indexX + thumbX)/2
+        centerX = int(centerX)
+        centerY = (indexY + thumbY)/2
+        centerY = int(centerY)
+        centerZ = (indexZ + thumbZ)/2
+        centerZ = int(centerZ)
+
         width, height = dims
         screen.fill(self.backgroundColor)  #pass in chooseBackgroundColor() function
-        circleRadius = indexY
-
-        temp = indexX
+        circleRadius = centerY
 
         
         #color palette lines
         screen.blit(background, (0,0))
         
         
-
         #dot
-        pygame.draw.circle(screen, self.drawingColor, (indexX, indexZ), circleRadius)
+        pygame.draw.circle(screen, self.drawingColor, (centerX, centerZ), circleRadius)
         if(self.drawBool):
-            pygame.draw.circle(background,self.drawingColor,(indexX, indexZ), circleRadius)
+            pygame.draw.circle(background,self.drawingColor,(centerX, centerZ), circleRadius)
         
         #color pallet
         
@@ -71,11 +74,16 @@ class GUI_Support:
         pygame.draw.circle(screen, self.GREY, (450,50), 40)
         pygame.draw.circle(screen, self.ORANGE, (550,50), 40)
         pygame.draw.circle(screen, self.YELLOW, (650,50), 40)
-
         pygame.draw.circle(screen, self.BLACK, (750,50), 40)
         
-  
 
+  
+        if((math.sqrt((centerX - 50)**2) + (centerZ - 50)**2)) <= 40):
+            self.drawingColor = self.BLACK
+        if((math.sqrt((centerX - 150)**2) + (centerZ - 50)**2)) <= 40):
+            self.drawingColor = self.RED
+
+        
     
 
      #Not sure what this does but crashes without it
