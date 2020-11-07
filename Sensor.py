@@ -42,7 +42,6 @@ class SampleListener(Leap.Listener):
             thumbPos = []
             indexPos = []
    
-            #Limits the xyz coordinate outputs to a certain range
             # Get fingers
             for finger in hand.fingers:
 
@@ -51,7 +50,6 @@ class SampleListener(Leap.Listener):
                     thumbPos.append(int(finger.tip_position[0]))
                     thumbPos.append(int(finger.tip_position[1]))
                     thumbPos.append(int(finger.tip_position[2]))
-                    #thumbPos = finger.tip_position
 
 
                 #Index
@@ -59,7 +57,6 @@ class SampleListener(Leap.Listener):
                     indexPos.append(int(finger.tip_position[0]))
                     indexPos.append(int(finger.tip_position[1]))
                     indexPos.append(int(finger.tip_position[2]))
-                    #indexPos = finger.tip_position
 
                 # print finger.tip_position
 
@@ -77,17 +74,33 @@ class SampleListener(Leap.Listener):
             print(indexPos)
             print("Coordinates of Thumb: " )
             print(thumbPos)
-            #intPos.append(indexPos)
-            #intPos.append(thumbPos)
             intPos = [indexPos, thumbPos]
+            for arr in intPos:
+                #x
+                if arr[0] > 400:
+                    arr[0] = 400
+                elif arr[0] < -400:
+                    arr[0] = -400
+
+                #y
+                if arr[1] > 850:
+                    arr[1] = 850
+                elif arr[1] < 50:
+                    arr[1] = 50
+
+                #z
+                if arr[2] > 400:
+                    arr[2] = 400
+                elif arr[2] < -400:
+                    arr[2] = -400
             print("2D Array of Index and Thumb")
             print(intPos)
 
             #Send information to the connected client, if one isnt there wait for connection of another client
-            # try:
-            #     clientsocket.send(str(intPos))
-            # except:
-            #     waitForConnection()
+            try:
+                clientsocket.send(str(intPos))
+            except:
+                waitForConnection()
 
 
         if not frame.hands.is_empty:
@@ -99,14 +112,15 @@ class SampleListener(Leap.Listener):
             zeroVector = [[-30, 450, -30], [30, 450, 30]]
 
             #Send information to the connected client, if one isnt there wait for connection of another client
-            # try:
-            #     clientsocket.send(str(zeroVector))
-            # except:
-            #     waitForConnection()
+            try:
+                clientsocket.send(str(zeroVector))
+            except:
+                waitForConnection()
 
 
 #Initializes hand tracker class
 def main():
+    
     # Create a sample listener and controller
     listener = SampleListener()
     controller = Leap.Controller()
@@ -139,7 +153,7 @@ def waitForConnection():
 
 #Waits for a client to connect to the websocket then proceeds to send coordinates to the client when they connect
 if __name__ == "__main__":
-    # global s
-    # waitForConnection()
+    global s
+    waitForConnection()
     main()
 
