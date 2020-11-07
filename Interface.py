@@ -8,6 +8,16 @@ class GUI_Support:
     #Initializes the GUI display
     def initDisplay(self, dims):
         pygame.init()
+        self.WHITE = (255, 255, 255)
+        self.BLACK = (0, 0, 0)
+        self.RED = (255, 50, 50)
+        self.YELLOW = (255, 255, 0)
+        self.GREEN = (0, 255, 50)
+        self.BLUE = (50, 50, 255)
+        self.GREY = (200, 200, 200)
+        self.ORANGE = (200, 100, 50)
+        self.CYAN = (0, 255, 255)
+        self.MAGENTA = (255, 0, 255)
         self.backgroundColor = (255,255,255)
         return pygame.display.set_mode(dims)
 
@@ -17,6 +27,7 @@ class GUI_Support:
 
     #Function to draw and update GUI graphics as it receives new coordinates
     def drawGraphics(self, position, screen, dims):
+        
         handX, handY, handZ = position
         handXVisual = handX
         handZVisual = handZ
@@ -26,7 +37,7 @@ class GUI_Support:
         handY = handY * -1
         handX += 500
         handZ += 500
-        handY = 20
+        handY = 25
         width, height = dims
         screen.fill(self.backgroundColor)  #pass in chooseBackgroundColor() function
         circleRadius = handY
@@ -35,7 +46,7 @@ class GUI_Support:
 
         #dot
         pygame.draw.circle(screen, (0, 0, 0), (handX, handZ), circleRadius)
-    #def chooseBackgroundColor(self):
+        pygame.draw.circle(screen, self.RED, (50,50), 40)
 
     
 
@@ -50,7 +61,7 @@ class GUI_Support:
 
 #Changes the screen content and updates the display
 def guiDisplay(coords):
-    guiSupport.drawGraphics(coords, screen, (800, 800))
+    guiSupport.drawGraphics(coords, screen, (1200, 900))
     pygame.display.update()
 
 
