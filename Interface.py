@@ -30,29 +30,35 @@ class GUI_Support:
         indexX, indexY, indexZ = position[0]
         thumbX, thumbY, thumbZ = position[1]
 
-        if(((indexX - thumbX) > 55) or ((thumbX - indexX) > 55) or ((indexZ - thumbZ) > 55) or ((thumbZ - indexZ) > 55)):
+        if(((indexX - thumbX) > 30) or ((thumbX - indexX) > 30) or ((indexZ - thumbZ) > 30) or ((thumbZ - indexZ) > 30)):
             self.drawBool = False
         else:
             self.drawBool = True
         indexX = indexX * 1.5
         indexZ = indexZ * 1.5
+        thumbX = thumbX * 1.5
+        thumbZ = thumbZ * 1.5
 
         #Centers the X and Z coordinates
         indexX += 600
         indexZ += 450
-        indexY = indexY / 20
+        indexY = 850 -indexY
+        thumbX += 600
+        thumbZ += 450
+        thumbY = 850 - thumbY
+        
 
 
         centerX = (indexX + thumbX)/2
         centerX = int(centerX)
-        centerY = (indexY + thumbY)/2
+        centerY = (indexY + thumbY)/40
         centerY = int(centerY)
         centerZ = (indexZ + thumbZ)/2
         centerZ = int(centerZ)
 
         width, height = dims
         screen.fill(self.backgroundColor)  #pass in chooseBackgroundColor() function
-        circleRadius = centerY
+        circleRadius = centerY + 2
 
         
         #color palette lines
@@ -61,12 +67,12 @@ class GUI_Support:
         
         #dot
         pygame.draw.circle(screen, self.drawingColor, (centerX, centerZ), circleRadius)
-        if(self.drawBool):
+        if(self.drawBool and not centerZ < 125):
             pygame.draw.circle(background,self.drawingColor,(centerX, centerZ), circleRadius)
         
         #color pallet
         
-        
+        pygame.draw.line(screen, self.BLACK, (0,100), (1200,100), 3)
         pygame.draw.circle(screen, self.BLACK, (50,50), 40)
         pygame.draw.circle(screen, self.RED, (150,50), 40)
         pygame.draw.circle(screen, self.BLUE, (250,50), 40)
@@ -78,10 +84,11 @@ class GUI_Support:
         
 
   
-        if((math.sqrt((centerX - 50)**2) + (centerZ - 50)**2)) <= 40):
+        if(((math.sqrt(((centerX - 50)**2) + (centerZ - 50)**2))) <= 40):
             self.drawingColor = self.BLACK
-        if((math.sqrt((centerX - 150)**2) + (centerZ - 50)**2)) <= 40):
+        if(((math.sqrt(((centerX - 150)**2) + (centerZ - 50)**2))) <= 40):
             self.drawingColor = self.RED
+            
 
         
     
