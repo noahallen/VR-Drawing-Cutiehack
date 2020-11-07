@@ -89,10 +89,10 @@ class SampleListener(Leap.Listener):
                     arr[1] = 50
 
                 #z
-                if arr[2] > 400:
-                    arr[2] = 400
-                elif arr[2] < -400:
-                    arr[2] = -400
+                if arr[2] > 300:
+                    arr[2] = 300
+                elif arr[2] < -300:
+                    arr[2] = -300
             print("2D Array of Index and Thumb")
             print(intPos)
 
