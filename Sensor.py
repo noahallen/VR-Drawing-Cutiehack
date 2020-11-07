@@ -56,9 +56,9 @@ class SampleListener(Leap.Listener):
 
                 #Index
                 if(finger.type == 1):
-                    thumbPos.append(int(finger.tip_position[0]))
-                    thumbPos.append(int(finger.tip_position[1]))
-                    thumbPos.append(int(finger.tip_position[2]))
+                    indexPos.append(int(finger.tip_position[0]))
+                    indexPos.append(int(finger.tip_position[1]))
+                    indexPos.append(int(finger.tip_position[2]))
                     #indexPos = finger.tip_position
 
                 # print finger.tip_position
@@ -77,9 +77,9 @@ class SampleListener(Leap.Listener):
             print(indexPos)
             print("Coordinates of Thumb: " )
             print(thumbPos)
-            intPos.append(indexPos)
-            intPos.append(thumbPos)
-            # intPos = [indexPos, thumbPos]
+            #intPos.append(indexPos)
+            #intPos.append(thumbPos)
+            intPos = [indexPos, thumbPos]
             print("2D Array of Index and Thumb")
             print(intPos)
 
