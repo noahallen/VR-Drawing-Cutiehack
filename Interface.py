@@ -88,6 +88,18 @@ class GUI_Support:
             self.drawingColor = self.BLACK
         if(((math.sqrt(((centerX - 150)**2) + (centerZ - 50)**2))) <= 40):
             self.drawingColor = self.RED
+        if(((math.sqrt(((centerX - 250)**2) + (centerZ - 50)**2))) <= 40):
+            self.drawingColor = self.BLUE
+        if(((math.sqrt(((centerX - 350)**2) + (centerZ - 50)**2))) <= 40):
+            self.drawingColor = self.GREEN
+        if(((math.sqrt(((centerX - 450)**2) + (centerZ - 50)**2))) <= 40):
+            self.drawingColor = self.GREY
+        if(((math.sqrt(((centerX - 550)**2) + (centerZ - 50)**2))) <= 40):
+            self.drawingColor = self.ORANGE
+        if(((math.sqrt(((centerX - 650)**2) + (centerZ - 50)**2))) <= 40):
+            self.drawingColor = self.YELLOW
+        if(((math.sqrt(((centerX - 750)**2) + (centerZ - 50)**2))) <= 40):
+            self.drawingColor = self.WHITE
             
 
         
