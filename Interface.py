@@ -1,6 +1,7 @@
 import socket
-import pygame, math, time. sys, os
+import pygame, math, time, sys, os
 from ast import literal_eval
+from hooman import Hooman
 
 class GUI_Support:
 
@@ -20,16 +21,49 @@ class GUI_Support:
         handXVisual = handX
         handZVisual = handZ
 
+
         #Centers the X and Z coordinates
         handY = handY * -1
-        handX += 400
-        handZ += 400
-        handY += 850
+        handX += 500
+        handZ += 500
+        handY += 500
         width, height = dims
         screen.fill(self.backgroundColor)  #pass in chooseBackgroundColor() function
 
+        #BACKGROUND COLOR SLIDER
+        window_width, window_height = (400*1.25), (400*1.25)
+        hapi = Hooman(window_width, window_height)
+
+
+        slider_options = {"value_range": [0, 255]}
+
+        r_slider = hapi.slider(50, 300, 400, 10, slider_options)
+        g_slider = hapi.slider(50, 330, 400, 10, slider_options)
+        b_slider = hapi.slider(50, 360, 400, 10, slider_options)
+
+        while hapi.is_running:
+            bg_col = (r_slider.value(), g_slider.value(), b_slider.value())
+            hapi.background(bg_col)
+
+            r_slider.update()
+            g_slider.update()
+            b_slider.update()
+
+            hapi.fill(hapi.color["black"])
+            r_text = "r:{}".format(r_slider.value())
+            hapi.text(r_text, 50, 280)
+            g_text = "g:{}".format(g_slider.value())
+            hapi.text(g_text, 50, 310)
+            b_text = "b:{}".format(b_slider.value())
+            hapi.text(b_text, 50, 340)
+
+            hapi.flip_display()
+            hapi.event_loop()
     
-    def chooseBackgroundColor(self):
+        #color palette lines
+        pygame.draw.line(screen, (0,0,0), (0,100), (1600,100))
+    
+    #def chooseBackgroundColor(self):
 
     
 
@@ -55,35 +89,37 @@ def connectToSocket():
 
 #Receives coordinates from web socket connection and passes them to the drone and GUI portions of the code
 def main():
+    
     try:
         while True:
+            guiDisplay((0,450,0))
             
-            #Receive 1024 bits of websocket information (Is enough for our purposes)
-            full_msg = ''
-            msg = s.recv(1024)
+    #         #Receive 1024 bits of websocket information (Is enough for our purposes)
+    #         full_msg = ''
+    #         msg = s.recv(1024)
 
-            #Full message recieves a decoded string of the server data
-            full_msg = msg.decode("utf-8")
-            print(full_msg)
+    #         #Full message recieves a decoded string of the server data
+    #         full_msg = msg.decode("utf-8")
+    #         print(full_msg)
 
-            #This is meant to clear the buffer until only one array is left if the buffer is filled too fast
-            while(len(full_msg) > 20):
+    #         #This is meant to clear the buffer until only one array is left if the buffer is filled too fast
+    #         while(len(full_msg) > 40):
 
-                #Re-receives 1024 bits of websocket information in order to clear the buffer 1024 bits at a time
-                full_msg = ''
-                msg = s.recv(1024)
-                full_msg = msg.decode("utf-8")
-                print(full_msg)
+    #             #Re-receives 1024 bits of websocket information in order to clear the buffer 1024 bits at a time
+    #             full_msg = ''
+    #             msg = s.recv(1024)
+    #             full_msg = msg.decode("utf-8")
+    #             print(full_msg)
             
 
-            #Turns the string array into an actual array of integers
-            coordinateArr = literal_eval(full_msg)
+    #         #Turns the string array into an actual array of integers
+    #         coordinateArr = literal_eval(full_msg)
 
-            #Passes the GUI an array of the hand coordinates
-            guiDisplay(coordinateArr)
+    #         #Passes the GUI an array of the hand coordinates
+    #         guiDisplay(coordinateArr)
 
-            #Function that takes coordinates and outputs drone commands to the connected drone
-            droneController(coordinateArr)
+    #         #Function that takes coordinates and outputs drone commands to the connected drone
+           
 
 
 
@@ -91,7 +127,7 @@ def main():
         print(type(inst)) 
         print(inst) 
         print("Connection closed")
-        droneLand()
+       
 
 
 #Initial function that runs 
@@ -99,15 +135,13 @@ if __name__ == "__main__":
     #Gets current working directory to pass to the GUI
     path = os.getcwd()
 
-    #Connects to the drone object
-    connectToDrone()
 
     #Initializes the pygame GUI window
     guiSupport = GUI_Support()
 
-    #Initializes window to 1300x800 but 800x800 is used for the X and Z portion of the display
-    xWidth = 1300
-    yHeight = 800
+    #Initializes window to  (1.25 multiplier)
+    xWidth = 1000   
+    yHeight = 1000
     screen = guiSupport.initDisplay((xWidth, yHeight))
 
     #Initializing font for coordinate display
@@ -116,9 +150,10 @@ if __name__ == "__main__":
     
 
     #Drone icon
-    icon = pygame.image.load(path + '\Drone.png')
-    pygame.display.set_icon(icon)
+    #icon = pygame.image.load(path + '\Drone.png')
+    #pygame.display.set_icon(icon)
     pygame.display.set_caption('VR Paint')
 
     #Connect to socket
-    connectToSocket()
+    main()
+    #connectToSocket()
