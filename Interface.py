@@ -26,13 +26,15 @@ class GUI_Support:
         handY = handY * -1
         handX += 500
         handZ += 500
-        handY += 500
+        handY = 20
         width, height = dims
         screen.fill(self.backgroundColor)  #pass in chooseBackgroundColor() function
-
+        circleRadius = handY
         #color palette lines
         pygame.draw.line(screen, (0,0,0), (0,100), (1600,100))
-    
+
+        #dot
+        pygame.draw.circle(screen, (0, 0, 0), (handX, handZ), circleRadius)
     #def chooseBackgroundColor(self):
 
     
@@ -65,33 +67,33 @@ def main():
     
     try:
         while True:
+            
+            #Receive 1024 bits of websocket information (Is enough for our purposes)
+            full_msg = ''
+            msg = s.recv(1024)
+
+            #Full message recieves a decoded string of the server data
+            full_msg = msg.decode("utf-8")
+            print(full_msg)
+
+            #This is meant to clear the buffer until only one array is left if the buffer is filled too fast
+            while(len(full_msg) > 40):
+
+                #Re-receives 1024 bits of websocket information in order to clear the buffer 1024 bits at a time
+                full_msg = ''
+                msg = s.recv(1024)
+                full_msg = msg.decode("utf-8")
+                print(full_msg)
+            
+
+            #Turns the string array into an actual array of integers
+            coordinateArr = literal_eval(full_msg)
+            print(coordinateArr)
+            #Passes the GUI an array of the hand coordinates
+            #guiDisplay(coordinateArr)
             guiDisplay((0,450,0))
-            
-    #         #Receive 1024 bits of websocket information (Is enough for our purposes)
-    #         full_msg = ''
-    #         msg = s.recv(1024)
 
-    #         #Full message recieves a decoded string of the server data
-    #         full_msg = msg.decode("utf-8")
-    #         print(full_msg)
-
-    #         #This is meant to clear the buffer until only one array is left if the buffer is filled too fast
-    #         while(len(full_msg) > 40):
-
-    #             #Re-receives 1024 bits of websocket information in order to clear the buffer 1024 bits at a time
-    #             full_msg = ''
-    #             msg = s.recv(1024)
-    #             full_msg = msg.decode("utf-8")
-    #             print(full_msg)
-            
-
-    #         #Turns the string array into an actual array of integers
-    #         coordinateArr = literal_eval(full_msg)
-
-    #         #Passes the GUI an array of the hand coordinates
-    #         guiDisplay(coordinateArr)
-
-    #         #Function that takes coordinates and outputs  commands to the connected 
+            #Function that takes coordinates and outputs  commands to the connected 
            
 
 
@@ -128,5 +130,5 @@ if __name__ == "__main__":
     pygame.display.set_caption('VR Paint')
 
     #Connect to socket
-    main()
-    #connectToSocket()
+    #main()
+    connectToSocket()
