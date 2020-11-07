@@ -43,10 +43,12 @@ class SampleListener(Leap.Listener):
             #Limits the xyz coordinate outputs to a certain range
             # Get fingers
             for finger in hand.fingers:
-
-                print "    %s Finger tip position: %d"
+                print finger.tip_position
+                print "    %s finger, id: %d, length: %fmm, width: %fmm" % (
                     self.finger_names[finger.type],
-                    finger.tipPosition)
+                    finger.id,
+                    finger.length,
+                    finger.width)
                 
 
 
