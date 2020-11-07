@@ -8,6 +8,14 @@ class GUI_Support:
     #Initializes the GUI display
     def initDisplay(self, dims):
         pygame.init()
+        self.drawingColor = (0,0,0)
+        self.BLACK = (0, 0, 0)
+        self.RED = (255, 50, 50)
+        self.YELLOW = (255, 255, 0)
+        self.GREEN = (0, 255, 50)
+        self.BLUE = (50, 50, 255)
+        self.GREY = (200, 200, 200)
+        self.ORANGE = (200, 100, 50)
         self.backgroundColor = (255,255,255)
         return pygame.display.set_mode(dims)
 
@@ -26,16 +34,34 @@ class GUI_Support:
         indexX += 600
         indexZ += 450
         indexY = indexY / 20
+        indexX = int(indexX)
+        indexY = int(indexY)
+        indexZ = int(indexZ)
         width, height = dims
         screen.fill(self.backgroundColor)  #pass in chooseBackgroundColor() function
-        circleRadius = indexYY
+        circleRadius = indexY
 
+        temp = indexX
+
+        
         #color palette lines
+        screen.blit(background, (0,0))
+        
         pygame.draw.line(screen, (0,0,0), (0,100), (1600,100))
 
         #dot
-        pygame.draw.circle(screen, (0, 0, 0), (handX, handZ), circleRadius)
-    #def chooseBackgroundColor(self):
+        pygame.draw.circle(screen, self.drawingColor, (indexX, indexZ), circleRadius)
+        #pygame.draw.circle(background,self.drawingColor,(indexX, indexZ), circleRadius)
+        
+        #color pallet
+        pygame.draw.circle(screen, self.BLACK, (50,50), 40)
+        pygame.draw.circle(screen, self.RED, (150,50), 40)
+        pygame.draw.circle(screen, self.BLUE, (250,50), 40)
+        pygame.draw.circle(screen, self.GREEN, (350,50), 40)
+        pygame.draw.circle(screen, self.GREY, (450,50), 40)
+        pygame.draw.circle(screen, self.ORANGE, (550,50), 40)
+        pygame.draw.circle(screen, self.YELLOW, (650,50), 40)
+  
 
     
 
@@ -120,6 +146,9 @@ if __name__ == "__main__":
     xWidth = 1200   
     yHeight = 900
     screen = guiSupport.initDisplay((xWidth, yHeight))
+    background=pygame.Surface(screen.get_size())
+    background=background.convert()
+    background.fill((255,255,255))
 
     #Initializing font for coordinate display
     pygame.font.init()
