@@ -17,19 +17,19 @@ class GUI_Support:
 
     #Function to draw and update GUI graphics as it receives new coordinates
     def drawGraphics(self, position, screen, dims):
-        handX, handY, handZ = position
-        handXVisual = handX
-        handZVisual = handZ
+        indexX, indexY, indexZ = position
 
+        indexX = indexX * 1.5
+        indexZ = indexZ * 1.5
 
         #Centers the X and Z coordinates
-        handY = handY * -1
-        handX += 500
-        handZ += 500
-        handY = 20
+        indexX += 600
+        indexZ += 450
+        indexY = indexY / 20
         width, height = dims
         screen.fill(self.backgroundColor)  #pass in chooseBackgroundColor() function
-        circleRadius = handY
+        circleRadius = indexYY
+
         #color palette lines
         pygame.draw.line(screen, (0,0,0), (0,100), (1600,100))
 
@@ -50,7 +50,7 @@ class GUI_Support:
 
 #Changes the screen content and updates the display
 def guiDisplay(coords):
-    guiSupport.drawGraphics(coords, screen, (800, 800))
+    guiSupport.drawGraphics(coords[0], screen, (800, 800))
     pygame.display.update()
 
 
@@ -90,8 +90,10 @@ def main():
             coordinateArr = literal_eval(full_msg)
             print(coordinateArr)
             #Passes the GUI an array of the hand coordinates
-            #guiDisplay(coordinateArr)
-            guiDisplay((0,450,0))
+            guiDisplay(coordinateArr)
+            
+            #Testing
+            # guiDisplay((0,450,0))
 
             #Function that takes coordinates and outputs  commands to the connected 
            
