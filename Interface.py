@@ -18,6 +18,7 @@ class GUI_Support:
         self.GREY = (200, 200, 200)
         self.ORANGE = (200, 100, 50)
         self.WHITE = (255,255,255)
+        self.CYAN = (0, 255, 255)
         self.backgroundColor = (255,255,255)
         return pygame.display.set_mode(dims)
 
@@ -42,10 +43,10 @@ class GUI_Support:
         #Centers the X and Z coordinates
         indexX += 600
         indexZ += 450
-        indexY = 850 -indexY
+        
         thumbX += 600
         thumbZ += 450
-        thumbY = 850 - thumbY
+       
         
 
 
@@ -67,6 +68,10 @@ class GUI_Support:
         
         #dot
         pygame.draw.circle(screen, self.drawingColor, (centerX, centerZ), circleRadius)
+        if(self.drawingColor == self.WHITE):
+            pygame.draw.circle(screen, self.BLACK, (centerX, centerZ), circleRadius+1,2)
+            
+            
         if(self.drawBool and not centerZ < 125):
             pygame.draw.circle(background,self.drawingColor,(centerX, centerZ), circleRadius)
         
@@ -80,7 +85,8 @@ class GUI_Support:
         pygame.draw.circle(screen, self.GREY, (450,50), 40)
         pygame.draw.circle(screen, self.ORANGE, (550,50), 40)
         pygame.draw.circle(screen, self.YELLOW, (650,50), 40)
-        pygame.draw.circle(screen, self.BLACK, (750,50), 40)
+        pygame.draw.circle(screen, self.CYAN, (750,50), 40)
+        pygame.draw.circle(screen, self.BLACK, (850,50), 40, 5)
         
 
   
@@ -99,9 +105,14 @@ class GUI_Support:
         if(((math.sqrt(((centerX - 650)**2) + (centerZ - 50)**2))) <= 40):
             self.drawingColor = self.YELLOW
         if(((math.sqrt(((centerX - 750)**2) + (centerZ - 50)**2))) <= 40):
+            self.drawingColor = self.CYAN
+        if(((math.sqrt(((centerX - 850)**2) + (centerZ - 50)**2))) <= 40):
             self.drawingColor = self.WHITE
             
-
+        # for event in pygame.event.get():
+        
+        #     if event.key == pygame.K_s:
+        #         pygame.image.save(background,'image.png')
         
     
 
