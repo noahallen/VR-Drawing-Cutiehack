@@ -43,14 +43,15 @@ class GUI_Support:
 
             #When a button is pressed down
             elif event.type == pygame.KEYDOWN:
-                image = "Data/image" + str(self.counter) + ".jpg"
-                #When l is pressed
                 if event.key == pygame.K_s:
+                    image = "Data/image" + str(self.counter) + ".jpg"
                     pygame.image.save(background, image)
                     self.counter +=1
                 
-                elif event.type == pygame.K_c:
-                    background.fill((255,255,255))
+                if event.key == pygame.K_c:
+                    pygame.draw.rect(background,self.WHITE,(0,0,1200,900))
+                    #screen.fill(self.WHITE)
+                    #screen.blit(background, (0,0))
 
         indexX, indexY, indexZ = position[0]
         thumbX, thumbY, thumbZ = position[1]
@@ -100,7 +101,7 @@ class GUI_Support:
             pygame.draw.circle(background,self.drawingColor,(centerX, centerZ), circleRadius)
         
         #color pallet
-        
+        #pygame.draw.rect(background,self.RED,(0,0,1200,900))
         pygame.draw.line(screen, self.BLACK, (0,100), (1200,100), 3)
         pygame.draw.circle(screen, self.BLACK, (50,50), 40)
         pygame.draw.circle(screen, self.RED, (150,50), 40)
@@ -111,7 +112,15 @@ class GUI_Support:
         pygame.draw.circle(screen, self.YELLOW, (650,50), 40)
         pygame.draw.circle(screen, self.CYAN, (750,50), 40)
         pygame.draw.circle(screen, self.BLACK, (850,50), 40, 5)
-        
+        erasorImg = pygame.image.load('eraser.png')
+        erasorImg = pygame.transform.scale(erasorImg, (40, 40))
+        screen.blit(erasorImg, (829,29))
+
+        clearVisual = myFont.render(f'Press C to Clear Drawing', True, self.BLACK)
+        screen.blit(clearVisual, (930,20))
+
+        clearVisual = myFont.render(f'Press S to Save Drawing', True, self.BLACK)
+        screen.blit(clearVisual, (930,60))
 
   
         if(((math.sqrt(((centerX - 50)**2) + (centerZ - 50)**2))) <= 40):
@@ -227,10 +236,12 @@ if __name__ == "__main__":
     pygame.font.init()
     myFont = pygame.font.SysFont('Arial', 22)
     
+    
 
     # icon
-    #icon = pygame.image.load(path + '\.png')
-    #pygame.display.set_icon(icon)
+    icon = pygame.image.load(path + '\icon.png')
+    icon = pygame.transform.scale(icon, (32, 32))
+    pygame.display.set_icon(icon)
     pygame.display.set_caption('VR Paint')
 
     #Connect to socket
