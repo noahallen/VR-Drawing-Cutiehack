@@ -48,6 +48,9 @@ class GUI_Support:
                 if event.key == pygame.K_s:
                     pygame.image.save(background, image)
                     self.counter +=1
+                
+                elif event.type == pygame.K_c:
+                    background.fill((255,255,255))
 
         indexX, indexY, indexZ = position[0]
         thumbX, thumbY, thumbZ = position[1]
