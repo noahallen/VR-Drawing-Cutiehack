@@ -83,8 +83,8 @@ class SampleListener(Leap.Listener):
                     arr[0] = -400
 
                 #y
-                if arr[1] > 850:
-                    arr[1] = 850
+                if arr[1] > 800:
+                    arr[1] = 800
                 elif arr[1] < 50:
                     arr[1] = 50
 

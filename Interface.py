@@ -20,6 +20,7 @@ class GUI_Support:
         self.WHITE = (255,255,255)
         self.CYAN = (0, 255, 255)
         self.backgroundColor = (255,255,255)
+        self.counter = 0
         return pygame.display.set_mode(dims)
 
     #Called when the x is clicked on the GUI
@@ -28,6 +29,26 @@ class GUI_Support:
 
     #Function to draw and update GUI graphics as it receives new coordinates
     def drawGraphics(self, position, screen, dims):
+        #For each event in the program
+        for event in pygame.event.get():
+
+            #If the close button is pressed
+            if event.type == pygame.QUIT:
+                # raise SystemExit
+                pass
+
+            #when mouse button is clicked, do nothing
+            elif event.type == pygame.MOUSEBUTTONDOWN or event.type == pygame.MOUSEBUTTONUP:
+                pass
+
+            #When a button is pressed down
+            elif event.type == pygame.KEYDOWN:
+                image = "Data/image" + str(self.counter) + ".jpg"
+                #When l is pressed
+                if event.key == pygame.K_s:
+                    pygame.image.save(background, image)
+                    self.counter +=1
+
         indexX, indexY, indexZ = position[0]
         thumbX, thumbY, thumbZ = position[1]
 
@@ -110,9 +131,7 @@ class GUI_Support:
             self.drawingColor = self.WHITE
             
         # for event in pygame.event.get():
-        
-        #     if event.key == pygame.K_s:
-        #         pygame.image.save(background,'image.png')
+    # def keyCommands():
         
     
 
@@ -173,7 +192,7 @@ def main():
             # guiDisplay((0,450,0))
 
             #Function that takes coordinates and outputs  commands to the connected 
-           
+            # keyCommands()
 
 
 
