@@ -20,4 +20,4 @@ We learned how to utilize a Leap Motion VR Hand Sensor and actually be able to i
 ## What's next for VR Drawing
 Next, would be more color options, more stability, and maybe different types of pens.
 
-Credit to: Noah Allen, Sahil Patel, Tinghui Song
+##Credit to: Noah Allen, Sahil Patel, Tinghui Song
