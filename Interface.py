@@ -16,9 +16,13 @@ class GUI_Support:
         self.GREEN = (0, 255, 50)
         self.BLUE = (50, 50, 255)
         self.GREY = (200, 200, 200)
-        self.ORANGE = (200, 100, 50)
+        self.GREY2 = (236,236,236)
+        self.BROWN = (101, 67, 33)
         self.WHITE = (255,255,255)
         self.CYAN = (0, 255, 255)
+        self.BEIGE = (249,228,183)
+        self.BEIGE2 = (207,185,151)
+        self.thiccness = 3
         self.backgroundColor = (255,255,255)
         self.counter = 0
         return pygame.display.set_mode(dims)
@@ -49,7 +53,7 @@ class GUI_Support:
                     self.counter +=1
                 
                 if event.key == pygame.K_c:
-                    pygame.draw.rect(background,self.WHITE,(0,0,1200,900))
+                    pygame.draw.rect(background,self.WHITE,(0,100,1200,900))
                     #screen.fill(self.WHITE)
                     #screen.blit(background, (0,0))
 
@@ -93,25 +97,43 @@ class GUI_Support:
         
         #dot
         pygame.draw.circle(screen, self.drawingColor, (centerX, centerZ), circleRadius)
-        if(self.drawingColor == self.WHITE):
-            pygame.draw.circle(screen, self.BLACK, (centerX, centerZ), circleRadius+1,2)
+        pygame.draw.circle(screen, self.BLACK, (centerX, centerZ), circleRadius+1,2)
             
             
         if(self.drawBool and not centerZ < 125):
             pygame.draw.circle(background,self.drawingColor,(centerX, centerZ), circleRadius)
         
+
         #color pallet
-        #pygame.draw.rect(background,self.RED,(0,0,1200,900))
+        pygame.draw.rect(background,self.BEIGE,(0,0,1200,100))
         pygame.draw.line(screen, self.BLACK, (0,100), (1200,100), 3)
+
         pygame.draw.circle(screen, self.BLACK, (50,50), 40)
+        pygame.draw.circle(screen, self.BLACK, (50,50), 41, self.thiccness)
+
         pygame.draw.circle(screen, self.RED, (150,50), 40)
+        pygame.draw.circle(screen, self.BLACK, (150,50), 41, self.thiccness)
+
         pygame.draw.circle(screen, self.BLUE, (250,50), 40)
+        pygame.draw.circle(screen, self.BLACK, (250,50), 41, self.thiccness)
+
         pygame.draw.circle(screen, self.GREEN, (350,50), 40)
+        pygame.draw.circle(screen, self.BLACK, (350,50), 41, self.thiccness)
+
         pygame.draw.circle(screen, self.GREY, (450,50), 40)
-        pygame.draw.circle(screen, self.ORANGE, (550,50), 40)
+        pygame.draw.circle(screen, self.BLACK, (450,50), 41, self.thiccness)
+
+        pygame.draw.circle(screen, self.BROWN, (550,50), 40)
+        pygame.draw.circle(screen, self.BLACK, (550,50), 41, self.thiccness)
+
         pygame.draw.circle(screen, self.YELLOW, (650,50), 40)
+        pygame.draw.circle(screen, self.BLACK, (650,50), 41, self.thiccness)
+
         pygame.draw.circle(screen, self.CYAN, (750,50), 40)
-        pygame.draw.circle(screen, self.BLACK, (850,50), 40, 5)
+        pygame.draw.circle(screen, self.BLACK, (750,50), 41, self.thiccness)
+
+        pygame.draw.circle(screen, self.WHITE, (850,50), 40)
+        pygame.draw.circle(screen, self.BLACK, (850,50), 41, self.thiccness)
         erasorImg = pygame.image.load('eraser.png')
         erasorImg = pygame.transform.scale(erasorImg, (40, 40))
         screen.blit(erasorImg, (829,29))
@@ -134,7 +156,7 @@ class GUI_Support:
         if(((math.sqrt(((centerX - 450)**2) + (centerZ - 50)**2))) <= 40):
             self.drawingColor = self.GREY
         if(((math.sqrt(((centerX - 550)**2) + (centerZ - 50)**2))) <= 40):
-            self.drawingColor = self.ORANGE
+            self.drawingColor = self.BROWN
         if(((math.sqrt(((centerX - 650)**2) + (centerZ - 50)**2))) <= 40):
             self.drawingColor = self.YELLOW
         if(((math.sqrt(((centerX - 750)**2) + (centerZ - 50)**2))) <= 40):
