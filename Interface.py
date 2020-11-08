@@ -13,8 +13,8 @@ class GUI_Support:
         self.BLACK = (0, 0, 0)
         self.RED = (255, 50, 50)
         self.YELLOW = (255, 255, 0)
-        self.GREEN = (0, 255, 50)
-        self.BLUE = (50, 50, 255)
+        self.GREEN = (45, 87, 44)
+        self.ORANGE = (246, 107, 41)
         self.GREY = (200, 200, 200)
         self.GREY2 = (236,236,236)
         self.BROWN = (101, 67, 33)
@@ -114,7 +114,7 @@ class GUI_Support:
         pygame.draw.circle(screen, self.RED, (150,50), 40)
         pygame.draw.circle(screen, self.BLACK, (150,50), 41, self.thiccness)
 
-        pygame.draw.circle(screen, self.BLUE, (250,50), 40)
+        pygame.draw.circle(screen, self.ORANGE, (250,50), 40)
         pygame.draw.circle(screen, self.BLACK, (250,50), 41, self.thiccness)
 
         pygame.draw.circle(screen, self.GREEN, (350,50), 40)
@@ -150,7 +150,7 @@ class GUI_Support:
         if(((math.sqrt(((centerX - 150)**2) + (centerZ - 50)**2))) <= 40):
             self.drawingColor = self.RED
         if(((math.sqrt(((centerX - 250)**2) + (centerZ - 50)**2))) <= 40):
-            self.drawingColor = self.BLUE
+            self.drawingColor = self.ORANGE
         if(((math.sqrt(((centerX - 350)**2) + (centerZ - 50)**2))) <= 40):
             self.drawingColor = self.GREEN
         if(((math.sqrt(((centerX - 450)**2) + (centerZ - 50)**2))) <= 40):
