@@ -6,7 +6,7 @@ The inspiration behind this VR Hand Painting project was a mix between making a 
 It allows the user to draw any image they want while only using the motion of their hand. To start drawing, you simply put your thumb and index finger together. To stop drawing, simply separate your fingers. It also allows the user to choose a pencil width by moving your hand closer or further from the sensor.
 
 ## How we built it
-By using a Leap Motion VR Hand Sensor, we were able to live feed of coordinates to a local WebSocket since our two files were coded in different versions of Python (python2.7 and python3). From there, we built a GUI using pygame in python and used a mixture of coordinate manipulation and different algorithms to successfully make this smooth running GUI. 
+By using a Leap Motion VR Hand Sensor, we were able to feed live coordinates to a local WebSocket since our two files were coded in different versions of Python (python2.7 and python3). From there, we built a GUI using pygame in python and used a mixture of coordinate manipulation and different algorithms to successfully make this smooth running GUI. 
 
 ## Challenges we ran into
 Our biggest challenge was being able to seamlessly transition from drawing to not drawing. It was hard because we didn't know how to make it so it still showed the painter's curser while not actively drawing. 
